@@ -127,7 +127,7 @@ class _DiaryViewState extends State<DiaryView> {
                       style: const TextStyle(
                         fontSize: 14,
                         color: Color(0xFF666666),
-                        lineHeight: 1.5,
+                        height: 1.5,
                       ),
                     ),
                   ],
