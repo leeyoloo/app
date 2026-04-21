@@ -1,0 +1,41 @@
+name: TXNOVEL Auto Sign
+
+on:
+  schedule:
+    - cron: '30 16 * * *'  # UTC 16:30 = 北京时间 00:30
+  workflow_dispatch:
+    inputs:
+      sign_max_delay:
+        description: '签到最大延迟秒数（默认0=立即签到，1800=30分钟）'
+        required: false
+        default: '0'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Sign Script
+        env:
+          COOKIE_TXNOVEL: ${{ secrets.COOKIE_TXNOVEL }}
+          WXPUSHER_SPT: ${{ secrets.WXPUSHER_SPT }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
+          FEISHU_SECRET: ${{ secrets.FEISHU_SECRET }}
+          FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
+          FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
+          FEISHU_APP_RECEIVE_ID: ${{ secrets.FEISHU_APP_RECEIVE_ID }}
+          FEISHU_APP_RECEIVE_TYPE: ${{ vars.FEISHU_APP_RECEIVE_TYPE }}
+          SIGN_MAX_DELAY: ${{ github.event.inputs.sign_max_delay || '0' }}
+        run: python3 sign.py

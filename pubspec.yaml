@@ -1,0 +1,31 @@
+name: miuix_notes_todo
+description: A Miuix style app for notes, todos, memos, and diaries.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  provider: ^6.0.5
+  sqflite: ^2.3.0
+  path: ^1.8.3
+  intl: ^0.18.1
+  flutter_slidable: ^3.0.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  animations: ^2.0.7
+  fluttertoast: ^8.2.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/images/
